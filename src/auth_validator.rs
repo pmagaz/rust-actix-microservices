@@ -1,8 +1,7 @@
-use actix_web::{dev::ServiceRequest, get, web, App, Error, HttpServer, Responder};
+use actix_web::{dev::ServiceRequest, Error};
 use actix_web_httpauth::extractors::bearer::{BearerAuth, Config};
 use actix_web_httpauth::extractors::AuthenticationError;
 
-use crate::state::AppState;
 use crate::token::decode_token;
 
 pub async fn bearer_auth_validator(

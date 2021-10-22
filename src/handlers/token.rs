@@ -1,5 +1,4 @@
-use actix_web::{web, HttpResponse, Responder};
-use bson;
+use actix_web::{web, HttpResponse};
 use chrono::Utc;
 use mongodb::bson::doc;
 use std::env;
@@ -59,8 +58,8 @@ pub async fn token(
   );
 
   let response = TokenResponse {
-    access_token: access_token.clone(),
-    id_token: id_token.clone(),
+    access_token: access_token,
+    id_token: id_token,
     token_type: "".to_owned(),
     expires_in: env::var("JWT_LIFE_SPAN").unwrap(),
     scope: "".to_owned(),

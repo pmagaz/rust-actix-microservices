@@ -1,6 +1,6 @@
 use crate::error::CustomError;
 use crate::models::{AccessCode, TokenReq, TokenResponse};
-use actix_web::{get, web, HttpResponse};
+use actix_web::{web, HttpResponse};
 use std::env;
 
 use crate::cookie;

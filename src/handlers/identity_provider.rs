@@ -1,10 +1,6 @@
 use actix_web::{web, HttpResponse};
 
-use mongodb::{
-  bson::{doc, Document},
-  error::Error,
-  options::FindOptions,
-};
+use mongodb::bson::doc;
 
 use crate::error::CustomError;
 use crate::models::User;

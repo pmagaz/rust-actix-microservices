@@ -1,4 +1,4 @@
-use mongodb::{bson::doc, error::Error, options::ClientOptions, Client};
+use mongodb::{bson::doc, options::ClientOptions, Client};
 use std::env;
 
 use crate::error::CustomError;

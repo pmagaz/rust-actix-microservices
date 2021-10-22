@@ -1,11 +1,9 @@
-use crate::models::{AccessToken, IdToken, User};
-use chrono::{DateTime, Utc};
+use crate::models::{AccessToken, IdToken};
 use dotenv::dotenv;
 use hmac::{Hmac, NewMac};
 use jwt::{SignWithKey, VerifyWithKey};
 
 use magic_crypt::MagicCryptTrait;
-use serde::{Deserialize, Serialize};
 
 use sha2::Sha256;
 use std::collections::BTreeMap;

@@ -1,6 +1,5 @@
 use bson::oid::ObjectId;
 use serde::{Deserialize, Serialize};
-use std::fmt;
 
 #[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 pub struct User {

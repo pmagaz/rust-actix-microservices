@@ -1,4 +1,4 @@
-use actix_web::{web, HttpResponse, Responder};
+use actix_web::{web, HttpResponse};
 use bson;
 use bson::oid::ObjectId;
 use chrono::Utc;
@@ -6,9 +6,7 @@ use mongodb::bson::doc;
 use std::env;
 
 use crate::error::CustomError;
-use crate::models::{
-  AccessCode, AccessToken, IdToken, TokenPassReq, TokenReq, TokenResponse, User,
-};
+use crate::models::{AccessToken, IdToken, TokenPassReq, TokenResponse, User};
 use crate::request::request;
 use crate::state::AppState;
 use crate::token::{generate_access_token, generate_id_token};

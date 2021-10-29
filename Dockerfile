@@ -1,7 +1,6 @@
 # BUILDER
-#FROM ekidd/rust-musl-builder:stable as builder
-FROM messense/rust-musl-cross:arm-musleabi as builder
-RUN rustup target add arm-unknown-linux-musleabi	
+FROM messense/rust-musl-cross:aarch64-musl as builder
+RUN rustup target add aarch64-unknown-linux-musl		
 RUN USER=root cargo new --bin rust-auth
 WORKDIR ./rust-auth
 COPY Cargo.toml Cargo.lock ./
@@ -9,13 +8,12 @@ RUN cargo build --release
 RUN rm src/*.rs
 
 ADD . ./
-#RUN rm ./target/x86_64-unknown-linux-musl/release/deps/rust_auth*
-RUN rm ./target/arm-unknown-linux-musleabi/release/deps/rust_auth*
+RUN rm ./target/aarch64-unknown-linux-musl/release/deps/rust_auth*
 COPY templates ./templates
 RUN cargo build --release 
 
 #IMAGE 
-FROM alpine:latest
+FROM arm64v8/alpine:latest
 ARG APP=/usr/src/rust-auth
 EXPOSE 8000
 ENV TZ=Etc/UTC \
@@ -25,11 +23,10 @@ RUN addgroup -S $APP_USER \
   && adduser -S -g $APP_USER $APP_USER
 
 RUN apk update \
-  && apk add --no-cache ca-certificates tzdata bash \
+  && apk add --no-cache ca-certificates tzdata\
   && rm -rf /var/cache/apk/*
 
-#COPY --from=builder /home/rust/src/rust-auth/target/x86_64-unknown-linux-musl/release/rust-auth ${APP}/rust-auth
-COPY --from=builder /home/rust/src/rust-auth/target/arm-unknown-linux-musleabi/release/rust-auth ${APP}/rust-auth
+COPY --from=builder /home/rust/src/rust-auth/target/aarch64-unknown-linux-musl/release/rust-auth ${APP}/rust-auth
 
 RUN chown -R $APP_USER:$APP_USER ${APP}
 

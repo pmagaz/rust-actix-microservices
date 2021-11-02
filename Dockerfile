@@ -36,9 +36,9 @@ ENV APP_NAME='Rust Auth Server'
 ENV ISSUER='rust-auth-server'
 ENV JWT_LIFE_SPAN=1800
 ENV PRIVATE_KEY='my private key'
-ENV IDENTITY_ENDPOINT=http://cluster:8000/oauth/identity
-ENV TOKEN_ENDPOINT=http://localhost:8000/oauth/token
-ENV REDIRECT_URL=http://localhost:8000/local/callback?
+ENV IDENTITY_ENDPOINT=http://cluster.local/oauth/identity
+ENV TOKEN_ENDPOINT=http://cluster.local/oauth/token
+ENV REDIRECT_URL=http://cluster.local/local/callback?
 ENV MONGO_DB_URI='mongodb+srv://mongoUser:QRYTwyxRP61G9Wx1@db-cluster.i4zkb.mongodb.net/auth-db?retryWrites=true&w=majority'
 
 CMD ["./rust-auth"]

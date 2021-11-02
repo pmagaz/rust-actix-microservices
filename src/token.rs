@@ -1,5 +1,4 @@
 use crate::models::{AccessToken, IdToken};
-use dotenv::dotenv;
 use hmac::{Hmac, NewMac};
 use jwt::{SignWithKey, VerifyWithKey};
 
@@ -12,10 +11,9 @@ use std::fs;
 use std::io::Result;
 
 pub fn get_key() -> Hmac<Sha256> {
-  dotenv().ok();
   let private_key = &env::var("PRIVATE_KEY").unwrap();
-  let content = fs::read_to_string(private_key).expect("Can't read private key");
-  let key: Hmac<Sha256> = Hmac::new_from_slice(content.as_bytes()).unwrap();
+  //let content = fs::read_to_string(private_key).expect("Can't read private key");
+  let key: Hmac<Sha256> = Hmac::new_from_slice(private_key.as_bytes()).unwrap();
   key
 }
 

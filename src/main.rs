@@ -1,6 +1,5 @@
 use actix_web::{middleware::Logger, web, App, HttpServer};
 use actix_web_httpauth::middleware::HttpAuthentication;
-use dotenv::dotenv;
 use std::io::Result;
 
 #[macro_use]
@@ -32,12 +31,13 @@ use state::AppState;
 
 #[actix_web::main]
 async fn main() -> Result<()> {
-    dotenv().ok();
-
+    let port = "8000";
     let mongodb: mongodb::Client = db_connect()
         .await
         .map_err(|_e| CustomError::NoDbConnection)
         .unwrap();
+
+    println!("[Server] Launching on port {:?}", port.clone());
 
     HttpServer::new(move || {
         App::new()
@@ -67,7 +67,8 @@ async fn main() -> Result<()> {
                     ),
             )
     })
-    .bind("0.0.0.0:8000")?
+    .bind(["0.0.0.0:", port].concat())
+    .expect("Can't launch server")
     .run()
     .await
 }

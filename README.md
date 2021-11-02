@@ -1,2 +1,2 @@
-# rust-sso
-Rust Single Sing on
+# rust-auth-provider
+Rust auth provider based on oAuth2 and OpenID Connect
